@@ -1,0 +1,103 @@
+This package was debianized by Mark Purcell <msp@debian.org> on
+Fri Apr 19 19:58:40 EST 2002
+
+It was downloaded from http://www.asterisk.org
+
+Upstream Authors: Mark Spencer <markster@linux-support.net>
+
+Copyright:
+
+   This package is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; version 2 dated June, 1991.
+
+   This package is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this package; if not, write to the Free Software
+   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+   02111-1307, USA.
+
+On Debian GNU/Linux systems, the complete text of the GNU General
+Public License can be found in `/usr/share/common-licenses/GPL'.
+
+Additional permission is granted to link Asterisk against the following
+packages:
+
+        * OpenH323
+        * OpenSSL
+        * Packages and modules whose authors have secured written
+authorization from Linux Support Services, Inc. to be linked to Asterisk.
+
+Asterisk modules *are* linked with Asterisk at runtime, so all Asterisk
+modules also fall under the terms granted herein.
+
+    Asterisk is distributed under GNU General Public License.  The GPL also
+  must apply to all loadable modules as well, except as defined below.
+
+    Linux Support Services, Inc. retains copyright to all of the core
+  Asterisk system, and therefore can grant, at its sole discression, the
+  ability for companies, individuals, or organizations to create proprietary
+  or Open Source (but non-GPL'd) modules which may be dynamically linked at
+  runtime with the portions of Asterisk which fall under our copyright
+  umbrella, or are distributed under more flexible licenses than GPL.  At
+  this time (5/21/2001) the only component of Asterisk which is covered
+  under GPL and not under our Copyright is the Xing MP3 decoder.
+
+    If you wish to use our code in other GPL programs, don't worry -- there
+  is no requirement that you provide the same exemption in your GPL'd
+  products (although if you've written a module for Asterisk we would
+  strongly encourage you to make the same excemption that we do).
+
+    If you have any questions, whatsoever, regarding our licensing policy,
+  please contact us.
+
+On Debian systems, the complete text of the GNU General Public License
+can be found in /usr/share/common-licenses/GPL.
+
+Other source code in Asterisk:
+
+  GSM source:
+
+    Copyright 1992, 1993, 1994 by Jutta Degener and Carsten Bormann,
+    Technische Universitaet Berlin
+
+    Any use of this software is permitted provided that this notice is not
+    removed and that neither the authors nor the Technische Universitaet Berlin
+    are deemed to have made any representations as to the suitability of this
+    software for any purpose nor are held responsible for any defects of
+    this software.  THERE IS ABSOLUTELY NO WARRANTY FOR THIS SOFTWARE.
+
+    As a matter of courtesy, the authors request to be informed about uses
+    this software has found, about bugs in this software, and about any
+    improvements that may be of general interest.
+
+    Berlin, 28.11.1994
+    Jutta Degener
+    Carsten Bormann
+
+  ADPCM source:
+
+    Copyright 1992 by Stichting Mathematisch Centrum, Amsterdam, The
+    Netherlands.
+
+                            All Rights Reserved
+
+    Permission to use, copy, modify, and distribute this software and its
+    documentation for any purpose and without fee is hereby granted,
+    provided that the above copyright notice appear in all copies and that
+    both that copyright notice and this permission notice appear in
+    supporting documentation, and that the names of Stichting Mathematisch
+    Centrum or CWI not be used in advertising or publicity pertaining to
+    distribution of the software without specific, written prior permission.
+
+    STICHTING MATHEMATISCH CENTRUM DISCLAIMS ALL WARRANTIES WITH REGARD TO
+    THIS SOFTWARE, INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
+    FITNESS, IN NO EVENT SHALL STICHTING MATHEMATISCH CENTRUM BE LIABLE
+    FOR ANY SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+    WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+    ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT
+    OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.

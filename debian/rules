@@ -1,0 +1,122 @@
+#!/usr/bin/make -f
+# Sample debian/rules that uses debhelper.
+# This file is public domain software, originally written by Joey Hess. 
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+# This is the debhelper compatibility version to use.
+export DH_COMPAT=4
+
+export PROC := $(shell dpkg-architecture -qDEB_HOST_ARCH)
+
+ifneq (,$(findstring debug,$(DEB_BUILD_OPTIONS)))
+	CFLAGS += -g
+endif
+ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
+	INSTALL_PROGRAM += -s
+endif
+
+export OPENH323DIR=/usr/share/openh323
+export PWLIBDIR=/usr/share/pwlib
+
+include /usr/share/dpatch/dpatch.make
+PACKAGE=asterisk
+
+configure: configure-stamp
+configure-stamp: patch-stamp
+	dh_testdir
+	# Add here commands to configure the package.
+
+	touch configure-stamp
+
+build-arch: configure-stamp  build-arch-stamp
+build-arch-stamp:
+	dh_testdir
+
+	# Add here command to compile/build the package.
+	cd channels/h323; make
+	$(MAKE)
+
+	touch build-arch-stamp
+
+build-indep:  configure-stamp build-indep-stamp
+build-indep-stamp:
+	dh_testdir
+
+	# Add here command to compile/build the arch indep package.
+	# It's ok not to do anything here, if you don't need to build
+	#  anything for this package.
+	#/usr/bin/docbook-to-man debian/asterisk.sgml > asterisk.1
+	$(MAKE) progdocs
+	
+	touch build-indep-stamp
+
+
+build: build-arch build-indep
+
+clean: unpatch
+	dh_testdir
+	dh_testroot
+	rm -f build-arch-stamp build-indep-stamp configure-stamp
+
+	# Add here commands to clean up after the build process.
+	cd channels/h323; make clean
+	-$(MAKE) clean
+	rm -fR doc/api agi/eagi-test agi/eagi-sphinx-test
+
+
+	dh_clean
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs var/run/asterisk
+
+	# Add here commands to install the package into debian/<packagename>
+	$(MAKE) INSTALL_PREFIX=$(CURDIR)/debian/tmp install samples
+	cp debian/asterisk.conf $(CURDIR)/debian/tmp/etc/asterisk/asterisk.conf
+	cp channels/h323/h323.conf.sample $(CURDIR)/debian/tmp/etc/asterisk/h323.conf
+
+
+	dh_install --sourcedir=debian/tmp
+
+# Build architecture-independent files here.
+binary-indep: build install
+	dh_testdir -i
+	dh_testroot -i
+	dh_installdocs -i
+	dh_installexamples -i -XCVS
+	dh_installcron -i
+	dh_installchangelogs ChangeLog -i
+	dh_link -i 
+	dh_compress -i
+	dh_fixperms -i
+	dh_installdeb -i
+	dh_gencontrol -i
+	dh_md5sums -i
+	dh_builddeb -i
+
+
+# Build architecture-dependent files here.
+binary-arch: build install
+	dh_testdir -a
+	dh_testroot -a
+	dh_installdocs -a
+	dh_installexamples -a -XCVS
+	dh_installlogrotate -a
+	dh_installinit -a -- defaults 21
+	dh_installchangelogs ChangeLog -a
+	dh_strip -a
+	dh_link -a
+	dh_compress -a
+	dh_fixperms -a
+	dh_installdeb -a
+	dh_shlibdeps -a
+	dh_gencontrol -a
+	dh_md5sums -a
+	dh_builddeb -a
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install configure

@@ -1,0 +1,6 @@
+# format version number, currently 2; this line is compulsory!
+version=2
+
+# Full-site-with-pattern  [Version  [Action]]
+opts=pasv ftp://ftp.asterisk.org/pub/telephony/asterisk/asterisk-([0-9].*)\.tar\.gz \
+	debian  uupdate

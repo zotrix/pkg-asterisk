@@ -1,0 +1,377 @@
+asterisk (0.9.0-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Mark Purcell <msp@debian.org>  Sun, 18 Apr 2004 22:51:59 +1000
+
+asterisk (0.7.2-4) unstable; urgency=low
+
+  * Update channels/h323/Makefile Closes: #235010:
+    asterisk_0.7.2-3(unstable/sparc): arch-dependent CFLAGS
+
+ -- Mark Purcell <msp@debian.org>  Fri, 27 Feb 2004 12:14:26 +1100
+
+asterisk (0.7.2-3) unstable; urgency=low
+
+  * Add Build-Depends: libopenh323-dev (Closes: Bug#233649)
+
+ -- Mark Purcell <msp@debian.org>  Tue, 24 Feb 2004 11:55:57 +1100
+
+asterisk (0.7.2-2) unstable; urgency=low
+
+  * Build-Depends: libpri-dev (Closes:Bug#199548)
+  * Include Suggests: rate-engine
+
+ -- Mark Purcell <msp@debian.org>  Thu,  5 Feb 2004 17:26:02 +1100
+
+asterisk (0.7.2-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Mark Purcell <msp@debian.org>  Thu,  5 Feb 2004 16:25:28 +1100
+
+asterisk (0.7.1-3) unstable; urgency=low
+
+  * Build with libopenh323 support (Closes: Bug#195233)
+  * Include Suggests: ohphone
+
+ -- Mark Purcell <msp@debian.org>  Tue,  3 Feb 2004 08:47:47 +1100
+
+asterisk (0.7.1-2) unstable; urgency=low
+
+  * Remove ppc fixup in codecs/lpc10/Makefile again. Prevents build on
+    ia64, mk68 et al
+
+ -- Mark Purcell <msp@debian.org>  Fri, 16 Jan 2004 11:46:57 +1100
+
+asterisk (0.7.1-1) unstable; urgency=low
+
+  * New upstream release
+  * i686 optomised build
+
+ -- Mark Purcell <msp@debian.org>  Thu, 15 Jan 2004 23:06:01 +1100
+
+asterisk (0.7.0-1) unstable; urgency=low
+
+  * LCA2004 release. Thanks Internode for the wireless access
+  * New upstream release
+  * Clean up bad symlinks in vm (Closes: Bug#220714)
+  * Apply restart gracefully patch from Nick Estes (Closes: Bug#217004)
+  * Fixup permission/ ownership problems in /etc/asterisk (Closes:
+    Bug#216995)
+  * Fixup master call log issues (Closes: Bug#217003)
+  * Remove Build-Depends: libmysql-dev - see doc/README.mysql (Closes:
+    Bug#222255)
+  * Build with include/linux/zaptel.h from zaptel-0.8.0.tar.gz
+  * Include Build-Depends: postgresql-dev
+  * Include Build-Depends: unixodbc-dev
+
+ -- Mark Purcell <msp@debian.org>  Wed, 14 Jan 2004 10:10:02 +1100
+
+asterisk (0.5.0-3) unstable; urgency=low
+
+  * Remove Suggests: gnophone (Orphaned and removed)
+  * Clean up bad symlinks in vm (Closes: Bug#220714)
+  * Apply restart gracefully patch from Nick Estes (Closes: Bug#217004)
+  * Fixup permission/ ownership problems in /etc/asterisk (Closes:
+    Bug#216995)
+  * Fixup master call log issues (Closes: Bug#217003)
+
+ -- Mark Purcell <msp@debian.org>  Tue, 13 Jan 2004 21:01:16 +1100
+
+asterisk (0.5.0-2) unstable; urgency=low
+
+  * Build-Depends: debhelper (>= 4.0.4) (Closes: Bug#216725)
+
+ -- Mark Purcell <msp@debian.org>  Fri, 31 Oct 2003 06:59:11 +1100
+
+asterisk (0.5.0-1) unstable; urgency=low
+
+  * New upstream release (Closes: Bug#196761)
+  * Build with include/linux/zaptel.h from zaptel-0.7.0.tar.gz
+
+ -- Mark Purcell <msp@debian.org>  Tue, 16 Sep 2003 23:40:05 +1000
+
+asterisk (0.4.0-6) unstable; urgency=low
+
+  * Include dh_install in debian/rules (Closes: Bug#207879)
+
+ -- Mark Purcell <msp@debian.org>  Wed, 10 Sep 2003 23:07:37 +1000
+
+asterisk (0.4.0-5) unstable; urgency=low
+
+  * Rebuild for libnewt-utf8-0 (NOT AVAILABLE)
+  * Build-Depend: libnewt-dev
+
+ -- Mark Purcell <msp@debian.org>  Sat,  5 Jul 2003 15:17:57 +1000
+
+asterisk (0.4.0-4) unstable; urgency=low
+
+  * include Build-Depends: libgtk1.2-dev  (Closes: Bug#194489)
+
+ -- Mark Purcell <msp@debian.org>  Sat,  5 Jul 2003 15:12:02 +1000
+
+asterisk (0.4.0-3) unstable; urgency=low
+
+  * Rebuild for libtonezone-0.60, libzaptel-0.60
+  * Change codecs/codec_gsm.c:#include <gsm/gsm.h> (Closes: Bug#190082)
+  * Start after isdnactivecards debian/rules dh_installinit (Closes:
+    Bug#191062)
+  * Change to Build-Depends: libnetw-utf8-dev
+  * Update Tormenta URL in debian/control
+
+ -- Mark Purcell <msp@debian.org>  Sat, 10 May 2003 16:58:03 +1000
+
+asterisk (0.4.0-2) unstable; urgency=low
+
+  * Remove ppc 'fixup' in codecs/lpc10/Makefile (Closes: Bug#189743)
+  * Updated description (Closes: Bug#168779)
+
+ -- Mark Purcell <msp@debian.org>  Sun, 20 Apr 2003 08:37:49 +1000
+
+asterisk (0.4.0-1) unstable; urgency=low
+
+  * New upstream release
+  * cdr/Makefile CFLAGS+=-fPIC -DPIC (Closes: Bug#188915)
+  * Include include/linux/zaptel.h from zaptel-0.6.0.tar.gz
+
+ -- Mark Purcell <msp@debian.org>  Sat, 19 Apr 2003 21:11:45 +1000
+
+asterisk (0.3.0-2) unstable; urgency=low
+
+  * Build-Depends: libmysqlclient-dev, libgtk2.0-dev (Closes: Bug#188188)
+
+ -- Mark Purcell <msp@debian.org>  Thu, 10 Apr 2003 20:08:38 +1000
+
+asterisk (0.3.0-1) unstable; urgency=low
+
+  * New upstream release
+  * channels/chan_zap_new.c is depreciated
+  * Debian patches to upstream Makefile are a lot cleaner!!
+  * Update /etc/init.d/asterisk stop to use 'stop now' command
+  * Hack AST_DATA_DIR to provide asterisk-sounds under /usr/share/asterisk
+  * `chown asterisk.asterisk /var/lib/asterisk` on install
+  * Remove dh_undocumented
+  * chan_oss failing again :-(
+  * Force Depends: libspeex1 (dpkg-shlibs bug?)
+
+ -- Mark Purcell <msp@debian.org>  Tue,  8 Apr 2003 21:27:52 +1000
+
+asterisk (0.2.0-cvs20030103-3) unstable; urgency=low
+
+  * Include Build-Depends: libasounds2-dev
+  * Update channels/Makefile to include Debian zaptel.h dir (Closes: Bug#178868)
+  * Thanks to mdz for the new libzap-dev and other patches
+
+ -- Mark Purcell <msp@debian.org>  Sat,  8 Mar 2003 15:45:40 +1100
+
+asterisk (0.2.0-cvs20030103-2) unstable; urgency=low
+
+  * Revert -march in codecs/lpc10/Makefile
+
+ -- Mark Purcell <msp@debian.org>  Sat, 25 Jan 2003 08:38:51 +1100
+
+asterisk (0.2.0-cvs20030103-1) unstable; urgency=low
+
+  * New upstream release
+  * Use invoke-rc.d in logrotate script (Closes: Bug#174633)
+
+ -- Mark Purcell <msp@debian.org>  Fri, 24 Jan 2003 21:57:43 +1100
+
+asterisk (0.2.0-4) unstable; urgency=low
+
+  * Add Build-Depends: bison (Closes: Bug#169312)
+
+ -- Mark Purcell <msp@debian.org>  Sun, 17 Nov 2002 09:03:01 +1100
+
+asterisk (0.2.0-3) unstable; urgency=low
+
+  * Fixed bison problems. ThanksMartijn
+  * Move gethostname in app_voicemail.c (Closes: Bug#168936)
+  * Move 0.2.0 to unstable. If you have OSS problems use asterisk/testing.
+
+ -- Mark Purcell <msp@debian.org>  Fri, 15 Nov 2002 20:36:03 +1100
+
+asterisk (0.2.0-2) experimental; urgency=low
+
+  * Incorporate changes from mdz (Remove graphviz, build astman)
+  * Force Build-Deps: bison-1.35 :(
+
+ -- Mark Purcell <msp@debian.org>  Sat, 26 Oct 2002 12:59:12 +1000
+
+asterisk (0.2.0-1) experimental; urgency=low
+
+  * New upstream release (Closes: Bug#163852)
+  * Uploaded to experimental as I am having problems with the chan_oss driver
+  which is a critial component.
+
+ -- Mark Purcell <msp@debian.org>  Wed,  9 Oct 2002 08:02:38 +1000
+
+asterisk (0.1.12-5) unstable; urgency=low
+
+  * Remove chown against /var/lib/asterisk (Closes: Bug#154774)
+  * Fixup vm symlink (Closes: Bug#158800)
+  * Fixup location of iaxtel.pub keys
+
+ -- Mark Purcell <msp@debian.org>  Sun,  8 Sep 2002 20:56:24 +1000
+
+asterisk (0.1.12-4) unstable; urgency=low
+
+  * Seperate into indep packages; asterisk, asterisk-[sounds,dev,doc]
+  * Sounds & images from /var/lib/asterisk to FHS compliant /usr/share/asterisk
+  * Remove DEBUG options from normal build
+  * Include Build-Depends: doxygen
+
+ -- Mark Purcell <msp@debian.org>  Wed, 24 Jul 2002 15:07:51 +1000
+
+asterisk (0.1.12-3) unstable; urgency=low
+
+  * Update Description
+  * Use dpkg-architecture to set processor optimisations (Closes: #153175)
+
+ -- Mark Purcell <msp@debian.org>  Wed, 17 Jul 2002 21:23:33 +1000
+
+asterisk (0.1.12-2) unstable; urgency=low
+
+  * Fixup build check for /etc/asterisk
+
+ -- Mark Purcell <msp@debian.org>  Tue,  9 Jul 2002 07:32:17 +1000
+
+asterisk (0.1.12-1) unstable; urgency=low
+
+  * New upstream release
+  * Fixup typo in /etc/init.d/asterisk
+  * Include [cdr_mysql.so] => (MySQL CDR Backend)
+  * Use excellent init.d script idea from Sim IJskes
+  * Fixup broken postinst & postinst scripts
+
+ -- Mark Purcell <msp@debian.org>  Mon,  8 Jul 2002 23:07:27 +1000
+
+asterisk (0.1.11-5) unstable; urgency=low
+
+  * Include zaptel support (Closes: Bug#151274)
+
+ -- Mark Purcell <msp@debian.org>  Fri,  5 Jul 2002 23:59:17 +1000
+
+asterisk (0.1.11-4) unstable; urgency=low
+
+  * Add init.d from Matt Zimmerman (Closes: Bug#150573)
+  * More updates from Matt Zimmerman: (Closes: Bug#151201)
+        -  place socket and fifo in /var/run/asterisk instead of /var/run
+        - fix mkfifo call (bug uncovered by running as non-root), patch
+        sent upstream also
+        - create postinst with necessary adduser and chown calls
+  * Install logrotate from Matt Zimmerman (Closes: Bug#151198)
+  * Disable geteuid check to allow running as non-root
+  * Add asterisk to audio group by default
+
+ -- Mark Purcell <msp@debian.org>  Sat, 29 Jun 2002 01:34:56 +1000
+
+asterisk (0.1.11-3) unstable; urgency=high
+
+  * Update cdr/Makefile to include CFLAGS+=-fPIC -DPIC (Closes: Bug#144052)
+
+ -- Mark Purcell <msp@debian.org>  Sat, 27 Apr 2002 21:19:32 +1000
+
+asterisk (0.1.11-2) unstable; urgency=low
+
+  * Move from non-us to main/comm
+  * Update copyright file to reflect upstream CVS LICENCE change to permit
+    linking with OpenSSL/ OpenH323 (Closes: Bug#141164)
+
+ -- Mark Purcell <msp@debian.org>  Fri, 19 Apr 2002 20:11:58 +1000
+
+asterisk (0.1.11-1) unstable; urgency=low
+
+  * New upstream release
+  * Update debian/control
+  * Include README.cdr & README.iax
+
+ -- Mark Purcell <msp@debian.org>  Mon, 18 Mar 2002 15:46:39 +1100
+
+asterisk (0.1.10-3) unstable; urgency=low
+
+  * Include CFLAGS+=-fPIC -DPIC in res/Makefile for hppa build
+
+ -- Mark Purcell <msp@debian.org>  Fri,  1 Mar 2002 20:58:02 +1100
+
+asterisk (0.1.10-2) unstable; urgency=low
+
+  * Change Build-Depends: libssl-dev (Closes: Bug#134821)
+
+ -- Mark Purcell <msp@debian.org>  Wed, 20 Feb 2002 22:28:35 +1100
+
+asterisk (0.1.10-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Mark Purcell <msp@debian.org>  Wed, 20 Feb 2002 22:28:00 +1100
+
+asterisk (0.1.9-5) unstable; urgency=low
+
+  * Better make that Architecture: any if I want this to autobuild :-)
+
+ -- Mark Purcell <msp@debian.org>  Wed,  2 Jan 2002 13:00:09 +1100
+
+asterisk (0.1.9-4) unstable; urgency=low
+
+  * Exclude MMX optimsed asm codecs/gsm/src/k6opt.s to enable non-x86 &
+    non-k6 builds (Closes: Bug#127225)
+
+ -- Mark Purcell <msp@debian.org>  Wed,  2 Jan 2002 12:59:38 +1100
+
+asterisk (0.1.9-3) unstable; urgency=low
+
+  * New maintainer (Closes: Bug#123497)
+  * Set Arch to i386 as this contains x86 assember code 
+
+ -- Mark Purcell <msp@debian.org>  Sat, 29 Dec 2001 10:25:21 +1100
+
+asterisk (0.1.9-2) unstable; urgency=high
+
+  * apps/Makefile, codecs/gsm/Makefile: Missed an -mpentium in CFLAGS.
+    Closes: #126552.
+
+ -- Matej Vela <vela@debian.org>  Thu, 27 Dec 2001 04:00:50 +0100
+
+asterisk (0.1.9-1) unstable; urgency=medium
+
+  * QA upload.
+  * New upstream version.
+  * Package is orphaned; maintainer set to Debian QA Group.
+  * debian/postrm: Ensure correct exit status.  Closes: #105523.
+  * debian/control: s/API's/APIs/  Closes: #124423.
+  * debian/conffiles: Already handled by debhelper; removed.
+  * Conforms to Standards version 3.5.6:
+    * debian/copyright: Include module licensing exception and GSM and
+      ADPCM copyrights.
+    * debian/rules:
+      * Use dh_undocumented rather than a verbatim copy of undocumented.7.
+      * Pass ChangeLog to dh_installchangelogs.
+      * Support DEB_BUILD_OPTIONS.
+
+ -- Matej Vela <vela@debian.org>  Tue, 25 Dec 2001 19:16:48 +0100
+
+asterisk (0.1.6-1.2) unstable; urgency=low
+
+  * NMU
+  * Fix makefiles, add -fPIC to builds.  Closes: #104779
+
+ -- LaMont Jones <lamont@smallone.fc.hp.com>  Sun, 15 Jul 2001 15:15:46 -0600
+
+asterisk (0.1.6-1.1) unstable; urgency=low
+
+  * NMU with permission of Raphael Bossek.
+  * Corrected an error in channels/adtranvofr.h that prevented
+    big endian from compiling. (closes: #87273, #89868, #93913)
+  * Added build dependencies.
+  * Added the location of the upstream source to debian/copyright.
+
+ -- Adrian Bunk <bunk@fs.tum.de>  Tue, 15 May 2001 00:22:31 +0200
+
+asterisk (0.1.6-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- Raphael Bossek <bossekr@debian.org>  Mon, 19 Feb 2001 15:48:43 +0100
+

@@ -1,0 +1,91 @@
+Source: asterisk
+Priority: optional
+Section: comm
+Maintainer: Mark Purcell <msp@debian.org>
+Standards-Version: 3.5.6
+Build-Depends: debhelper (>= 4.0.4), libgtk2.0-dev | libgtk-dev, libreadline4-dev | libreadline-dev, libgsm1-dev, libssl-dev, libzap-dev, libtonezone-dev, doxygen, bison, libedit-dev, libasound2-dev, postgresql-dev, unixodbc-dev, libpri-dev, libopenh323-dev, dpatch
+
+Package: asterisk
+Architecture: any
+Section: comm
+Depends: ${shlibs:Depends}, asterisk-sounds
+Suggests: ohphone, kphone, asterisk-doc, asterisk-dev, rate-engine
+Description: Open Source Private Branch Exchange (PBX)
+ Asterisk is an Open Source telephony switching and private branch
+ exchange daemon. It is built with a modular architecture for hardware
+ interfaces and telephony applications. A large number of switching and
+ packet voice protocols and a variety of hardware interfaces are
+ supported, and more are in development.
+ .
+ It supports a wide range of TDM protocols for the handling and
+ transmission of voice over traditional telephony interfaces. Asterisk
+ supports US and European standard signalling types used in standard
+ business phone systems, allowing it to bridge between next generation
+ voice-data integrated networks and existing infrastucture. Asterisk
+ not only supports traditional phone equipment, it enhances them with
+ additional capabilities.
+ .
+ Using the IAX Voice over IP protocol, Asterisk merges voice and data
+ traffic seemlessly across disparate networks. While using Packet
+ Voice, it is possible to send data such as URL information and images
+ in-line with voice traffic, allowing advanced integration of
+ information.
+ .
+ Asterisk provides a central switching core, with four APIs for modular
+ loading of telephony applications, hardware interfaces, file format
+ handling, and codecs. It allows for transparent switching between
+ between all supported interfaces, allowing it to tie together a
+ diverse mixture of telephony systems into a single switching network.
+ .
+ Currently, most PRI and Robbed Bit signalling is supported, as well as
+ BRI(ISDN4Linux). Packet Voice is available through the IAX, H.323 and 
+ SIP protocols
+ .
+ To use Asterisk right now, you will need at least one of the following:
+ .
+  * OSS compatible full-duplex sound card (http://www.opensound.com)
+  * ALSA compatible full-duplex sound card (http://www.alsa-project.org)
+  * All Wildcard (tm) products from LSS (http://www.linux-support.net)
+  * QuickNet Internet PhoneJack and LineJack (http://www.quicknet.net)
+  * Adtran Atlas 800 Plus (http://www.adtran.com)
+  * ISDN4Linux compatible ISDN card (http://www.isdn4linux.de)
+  * Tormenta Dual T1 card (http://zapatatelephony.org)
+ .
+ This Debian package includes the sample PBX, with demonstration extensions, etc
+ .
+ Website: http://www.asterisk.org.
+
+Package: asterisk-doc
+Recommends: asterisk
+Conflicts: asterisk (<=0.1.12-3)
+Replaces: asterisk (<=0.1.12-3)
+Section: doc
+Architecture: all
+Description: Documentation for asterisk
+ Asterisk is an Open Source PBX and telephony toolkit.
+ .
+ This package contains the source documentation needed if you wish to
+ extend the asterisk package.
+
+Package: asterisk-dev
+Architecture: all
+Recommends: asterisk
+Conflicts: asterisk (<=0.1.12-3)
+Replaces: asterisk (<=0.1.12-3)
+Section: devel
+Description: Development files for asterisk
+ Asterisk is an Open Source PBX and telephony toolkit.
+ .
+ This package contains the include files used if you wish to compile a
+ package which requires asterisk source file headers.
+
+Package: asterisk-sounds
+Architecture: all
+Recommends: asterisk
+Conflicts: asterisk (<=0.1.12-3)
+Replaces: asterisk (<=0.4.0-5)
+Section: comm
+Description: Sound files for asterisk
+ Asterisk is an Open Source PBX and telephony toolkit.
+ .
+ This package contains the default sound files for operation of asterisk
