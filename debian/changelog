@@ -1,3 +1,22 @@
+asterisk (1:0.9.1-1) unstable; urgency=low
+
+  * New upstream release. Previous version WAS tagged as 1.0 in CVS :-(
+  * Closes: #249046: no ring indication
+  * Closes: #254654: init.d/asterisk restart kills asterisk
+  * Build-Depends: libgtk1.2-dev, libspeex-dev (Closes: Bug#253639)
+  * Turn off broken H.323 support (Closes: Bug#255662)
+  * Closes: #250302: Package description is slightly outdated and incorrect
+  * Closes: #255685: Syntax error in configuration file, /etc/asterisk/sip.conf
+  * Closes: #228722: please add postgres support for asterisk
+
+ -- Mark Purcell <msp@debian.org>  Sat,  3 Jul 2004 22:47:41 +1000
+
+asterisk (1.0-2) unstable; urgency=low
+
+  * Rebuild for new libopenh323-dev
+
+ -- Mark Purcell <msp@debian.org>  Sat,  3 Jul 2004 21:56:58 +1000
+			      
 asterisk (1.0-2) unstable; urgency=low
 
   * Merged 1.0-1 and 0.9.0-2

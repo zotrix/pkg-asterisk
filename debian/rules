@@ -35,7 +35,7 @@ build-arch-stamp:
 	dh_testdir
 
 	# Add here command to compile/build the package.
-	cd channels/h323; make
+#	cd channels/h323; make
 	$(MAKE)
 
 	touch build-arch-stamp
@@ -61,9 +61,9 @@ clean: unpatch
 	rm -f build-arch-stamp build-indep-stamp configure-stamp
 
 	# Add here commands to clean up after the build process.
-	cd channels/h323; make clean
-	-$(MAKE) clean
-	rm -fR doc/api agi/eagi-test agi/eagi-sphinx-test
+#	cd channels/h323; make clean
+#	$(MAKE) clean
+#	rm -fR doc/api agi/eagi-test agi/eagi-sphinx-test
 
 
 	dh_clean
