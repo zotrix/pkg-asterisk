@@ -1,8 +1,8 @@
 #! /bin/sh -e
-## 10_rollup_0.9.0-1.dpatch by Jose Carlos Garcia Sogo <jsogo@debian.org>
+## 10_rollup-1.0-1.dpatch by Jose Carlos Garcia Sogo <jsogo@debian.org>
 ##
 ## All lines beginning with `## DP:' are a description of the patch.
-## DP: New patch generated from asterisk 0.9.0-1 diff.gz
+## DP: New patch generated from asterisk 1.0-1 diff.gz
 
 if [ $# -lt 1 ]; then
     echo "`basename $0`: script expects -patch|-unpatch as argument" >&2
@@ -24,8 +24,8 @@ exit 0
 
 @DPATCH@
 
---- asterisk-0.9.0.orig/apps/Makefile
-+++ asterisk-0.9.0/apps/Makefile
+--- asterisk-1.0.orig/apps/Makefile
++++ asterisk-1.0/apps/Makefile
 @@ -34,10 +34,10 @@
  #APPS+=app_sql_postgres.so
  #APPS+=app_sql_odbc.so
@@ -57,8 +57,8 @@ exit 0
  
  ifneq ($(wildcard .depend),)
  include .depend
---- asterisk-0.9.0.orig/apps/app_flash.c
-+++ asterisk-0.9.0/apps/app_flash.c
+--- asterisk-1.0.orig/apps/app_flash.c
++++ asterisk-1.0/apps/app_flash.c
 @@ -21,7 +21,7 @@
  #include <asterisk/image.h>
  #include <asterisk/options.h>
@@ -68,8 +68,8 @@ exit 0
  #include <string.h>
  #include <errno.h>
  #include <stdlib.h>
---- asterisk-0.9.0.orig/apps/app_meetme.c
-+++ asterisk-0.9.0/apps/app_meetme.c
+--- asterisk-1.0.orig/apps/app_meetme.c
++++ asterisk-1.0/apps/app_meetme.c
 @@ -31,7 +31,7 @@
  #include <sys/ioctl.h>
  
@@ -79,8 +79,8 @@ exit 0
  
  static char *tdesc = "Simple MeetMe conference bridge";
  
---- asterisk-0.9.0.orig/apps/app_zapbarge.c
-+++ asterisk-0.9.0/apps/app_zapbarge.c
+--- asterisk-1.0.orig/apps/app_zapbarge.c
++++ asterisk-1.0/apps/app_zapbarge.c
 @@ -33,7 +33,7 @@
  #include <sys/ioctl.h>
  
@@ -90,8 +90,8 @@ exit 0
  static char *tdesc = "Barge in on Zap channel application";
  
  static char *app = "ZapBarge";
---- asterisk-0.9.0.orig/apps/app_zapras.c
-+++ asterisk-0.9.0/apps/app_zapras.c
+--- asterisk-1.0.orig/apps/app_zapras.c
++++ asterisk-1.0/apps/app_zapras.c
 @@ -33,7 +33,7 @@
  #include <pthread.h>
  
@@ -101,8 +101,8 @@ exit 0
  
  static char *tdesc = "Zap RAS Application";
  
---- asterisk-0.9.0.orig/Makefile
-+++ asterisk-0.9.0/Makefile
+--- asterisk-1.0.orig/Makefile
++++ asterisk-1.0/Makefile
 @@ -18,6 +18,7 @@
  
  OSARCH=$(shell uname -s)
@@ -289,8 +289,8 @@ exit 0
  	done
  
  webvmail:
---- asterisk-0.9.0.orig/astconf.h
-+++ asterisk-0.9.0/astconf.h
+--- asterisk-1.0.orig/astconf.h
++++ asterisk-1.0/astconf.h
 @@ -28,5 +28,6 @@
  extern char ast_config_AST_PID[AST_CONFIG_MAX_PATH];
  extern char ast_config_AST_SOCKET[AST_CONFIG_MAX_PATH];
@@ -298,9 +298,9 @@ exit 0
 +extern char ast_config_AST_DATA_DIR[AST_CONFIG_MAX_PATH];
  
  #endif
---- asterisk-0.9.0.orig/asterisk.c
-+++ asterisk-0.9.0/asterisk.c
-@@ -105,6 +105,7 @@
+--- asterisk-1.0.orig/asterisk.c
++++ asterisk-1.0/asterisk.c
+@@ -110,6 +110,7 @@
  char ast_config_AST_PID[AST_CONFIG_MAX_PATH];
  char ast_config_AST_SOCKET[AST_CONFIG_MAX_PATH];
  char ast_config_AST_RUN_DIR[AST_CONFIG_MAX_PATH];
@@ -308,7 +308,7 @@ exit 0
  
  static char *_argv[256];
  static int shuttingdown = 0;
-@@ -1237,6 +1238,7 @@
+@@ -1242,6 +1243,7 @@
  	strncpy((char *)ast_config_AST_PID,AST_PID,sizeof(ast_config_AST_PID)-1);
  	strncpy((char *)ast_config_AST_SOCKET,AST_SOCKET,sizeof(ast_config_AST_SOCKET)-1);
  	strncpy((char *)ast_config_AST_RUN_DIR,AST_RUN_DIR,sizeof(ast_config_AST_RUN_DIR)-1);
@@ -316,7 +316,7 @@ exit 0
  	
  	/* no asterisk.conf? no problem, use buildtime config! */
  	if (!cfg) {
-@@ -1298,13 +1300,6 @@
+@@ -1303,13 +1305,6 @@
  	tdd_init();
  	if (getenv("HOME")) 
  		snprintf(filename, sizeof(filename), "%s/.asterisk_history", getenv("HOME"));
@@ -330,8 +330,8 @@ exit 0
  	/* Check for options */
  	while((c=getopt(argc, argv, "hfdvqprgcinx:C:")) != -1) {
  		switch(c) {
---- asterisk-0.9.0.orig/asterisk.h
-+++ asterisk-0.9.0/asterisk.h
+--- asterisk-1.0.orig/asterisk.h
++++ asterisk-1.0/asterisk.h
 @@ -28,11 +28,12 @@
  #define AST_AGI_DIR	ASTAGIDIR
  #define AST_KEY_DIR	ASTVARLIBDIR "/keys"
@@ -347,8 +347,8 @@ exit 0
  
  /* Provided by module.c */
  extern int load_modules(void);
---- asterisk-0.9.0.orig/cli.c
-+++ asterisk-0.9.0/cli.c
+--- asterisk-1.0.orig/cli.c
++++ asterisk-1.0/cli.c
 @@ -25,7 +25,7 @@
  #include <string.h>
  #include <pthread.h>
@@ -358,9 +358,9 @@ exit 0
  /* For module directory */
  #include "asterisk.h"
  #include "build.h"
---- asterisk-0.9.0.orig/file.c
-+++ asterisk-0.9.0/file.c
-@@ -275,7 +275,7 @@
+--- asterisk-1.0.orig/file.c
++++ asterisk-1.0/file.c
+@@ -276,7 +276,7 @@
  {
  	char *fn;
  	char tmp[AST_CONFIG_MAX_PATH]="";
@@ -369,8 +369,8 @@ exit 0
  	fn = malloc(strlen(tmp) + strlen(filename) + strlen(ext) + 10);
  	if (fn) {
  		if (filename[0] == '/') 
---- asterisk-0.9.0.orig/image.c
-+++ asterisk-0.9.0/image.c
+--- asterisk-1.0.orig/image.c
++++ asterisk-1.0/image.c
 @@ -95,9 +95,9 @@
  			snprintf(buf, len, "%s.%s", filename, ext);
  	} else {
@@ -383,8 +383,8 @@ exit 0
  	}
  }
  
---- asterisk-0.9.0.orig/cdr/Makefile
-+++ asterisk-0.9.0/cdr/Makefile
+--- asterisk-1.0.orig/cdr/Makefile
++++ asterisk-1.0/cdr/Makefile
 @@ -12,10 +12,10 @@
  #
  
@@ -398,8 +398,8 @@ exit 0
  
  #
  # unixODBC stuff...
---- asterisk-0.9.0.orig/channels/h323/Makefile
-+++ asterisk-0.9.0/channels/h323/Makefile
+--- asterisk-1.0.orig/channels/h323/Makefile
++++ asterisk-1.0/channels/h323/Makefile
 @@ -1,5 +1,9 @@
  # include the Makefile of OpenH323 
  
@@ -437,8 +437,8 @@ exit 0
  
  
  all:   	libchanh323.a
---- asterisk-0.9.0.orig/channels/Makefile
-+++ asterisk-0.9.0/channels/Makefile
+--- asterisk-1.0.orig/channels/Makefile
++++ asterisk-1.0/channels/Makefile
 @@ -40,6 +40,7 @@
  CHANNEL_LIBS+=$(shell [ -f /usr/include/linux/ixjuser.h ] && echo chan_phone.so)
  CHANNEL_LIBS+=$(shell [ -f h323/libchanh323.a ] && echo chan_h323.so)
@@ -465,7 +465,7 @@ exit 0
  
  CHANNEL_LIBS+=$(shell [ -f /usr/include/nbs.h ] && echo "chan_nbs.so" )
  
-@@ -158,7 +159,7 @@
+@@ -160,7 +161,7 @@
  	 $(CXX) $(SOLINK) -o $@ $< -lvpb -lpthread -lm -ldl
  
  chan_h323.so: chan_h323.o h323/libchanh323.a
@@ -474,8 +474,8 @@ exit 0
  
  
  #chan_modem.so : chan_modem.o
---- asterisk-0.9.0.orig/channels/chan_zap.c
-+++ asterisk-0.9.0/channels/chan_zap.c
+--- asterisk-1.0.orig/channels/chan_zap.c
++++ asterisk-1.0/channels/chan_zap.c
 @@ -45,7 +45,7 @@
  #include <stdint.h>
  #include <unistd.h>
@@ -485,8 +485,8 @@ exit 0
  #include <math.h>
  #include <tonezone.h>
  #include <ctype.h>
---- asterisk-0.9.0.orig/codecs/gsm/Makefile
-+++ asterisk-0.9.0/codecs/gsm/Makefile
+--- asterisk-1.0.orig/codecs/gsm/Makefile
++++ asterisk-1.0/codecs/gsm/Makefile
 @@ -65,7 +65,7 @@
  # CCFLAGS 	= -c -O
  
@@ -496,8 +496,8 @@ exit 0
  
  LD 		= $(CC)
  
---- asterisk-0.9.0.orig/codecs/Makefile
-+++ asterisk-0.9.0/codecs/Makefile
+--- asterisk-1.0.orig/codecs/Makefile
++++ asterisk-1.0/codecs/Makefile
 @@ -21,13 +21,13 @@
  MODG723+=$(shell [ -f g723.1b/coder2.c ] && echo "codec_g723_1b.so")
  MODSPEEX=$(shell [ -f /usr/include/speex.h ] || [ -f /usr/local/include/speex.h ] && echo "codec_speex.so")
@@ -515,8 +515,8 @@ exit 0
  LIBLPC10=lpc10/liblpc10.a
  LIBSPEEX=$(shell [ -f /usr/local/lib/libspeex.a ] && echo "-L/usr/local/lib")
  LIBSPEEX+=-lspeex -lm
---- asterisk-0.9.0.orig/codecs/codec_gsm.c
-+++ asterisk-0.9.0/codecs/codec_gsm.c
+--- asterisk-1.0.orig/codecs/codec_gsm.c
++++ asterisk-1.0/codecs/codec_gsm.c
 @@ -31,8 +31,8 @@
  #include <netinet/in.h>
  #include <string.h>
@@ -527,8 +527,8 @@ exit 0
  #include "../formats/msgsm.h"
  
  /* Sample frame data */
---- asterisk-0.9.0.orig/codecs/lpc10/Makefile
-+++ asterisk-0.9.0/codecs/lpc10/Makefile
+--- asterisk-1.0.orig/codecs/lpc10/Makefile
++++ asterisk-1.0/codecs/lpc10/Makefile
 @@ -22,20 +22,9 @@
  # 
  
@@ -551,8 +551,8 @@ exit 0
  LIB = $(LIB_TARGET_DIR)/liblpc10.a
  
  .PHONY: all clean
---- asterisk-0.9.0.orig/contrib/asterisk-ng-doxygen
-+++ asterisk-0.9.0/contrib/asterisk-ng-doxygen
+--- asterisk-1.0.orig/contrib/asterisk-ng-doxygen
++++ asterisk-1.0/contrib/asterisk-ng-doxygen
 @@ -707,7 +707,7 @@
  # toolkit from AT&T and Lucent Bell Labs. The other options in this section 
  # have no effect if this option is set to NO (the default)
@@ -562,8 +562,8 @@ exit 0
  
  # If the CLASS_GRAPH and HAVE_DOT tags are set to YES then doxygen 
  # will generate a graph for each documented class showing the direct and 
---- asterisk-0.9.0.orig/formats/Makefile
-+++ asterisk-0.9.0/formats/Makefile
+--- asterisk-1.0.orig/formats/Makefile
++++ asterisk-1.0/formats/Makefile
 @@ -20,9 +20,9 @@
  #
  #FORMAT_LIBS+=format_g723.so
@@ -576,8 +576,8 @@ exit 0
  
  all: depend $(FORMAT_LIBS)
  
---- asterisk-0.9.0.orig/include/linux/zaptel.h
-+++ asterisk-0.9.0/include/linux/zaptel.h
+--- asterisk-1.0.orig/include/linux/zaptel.h
++++ asterisk-1.0/include/linux/zaptel.h
 @@ -0,0 +1,1381 @@
 +/*
 + * Zapata Telephony Interface
@@ -1960,8 +1960,8 @@ exit 0
 +#endif /* __KERNEL__ */
 +
 +#endif /* _LINUX_ZAPTEL_H */
---- asterisk-0.9.0.orig/pbx/Makefile
-+++ asterisk-0.9.0/pbx/Makefile
+--- asterisk-1.0.orig/pbx/Makefile
++++ asterisk-1.0/pbx/Makefile
 @@ -27,7 +27,7 @@
  MOC=$(QTDIR)/bin/moc
  KDE_FLAGS=-I$(KDEDIR)/include -I$(KDEDIR)/include/kde -I$(QTDIR)/include
@@ -1971,8 +1971,8 @@ exit 0
  
  KDE_CONSOLE_OBJS=pbx_kdeconsole_main.o pbx_kdeconsole.o 
  
---- asterisk-0.9.0.orig/pbx/pbx_wilcalu.c
-+++ asterisk-0.9.0/pbx/pbx_wilcalu.c
+--- asterisk-1.0.orig/pbx/pbx_wilcalu.c
++++ asterisk-1.0/pbx/pbx_wilcalu.c
 @@ -12,7 +12,7 @@
   * the GNU General Public License
  
@@ -1982,8 +1982,8 @@ exit 0
   *  Format of string is :
   *  "tech/tele,filename&" ie. "tor1/23,file&"
   */
---- asterisk-0.9.0.orig/res/Makefile
-+++ asterisk-0.9.0/res/Makefile
+--- asterisk-1.0.orig/res/Makefile
++++ asterisk-1.0/res/Makefile
 @@ -15,8 +15,8 @@
  
  CRYPTO_LIBS=-lssl -lcrypto
@@ -1995,8 +1995,8 @@ exit 0
  #
  # Work around buggy RedHat 9.0
  #
---- asterisk-0.9.0.orig/res/res_musiconhold.c
-+++ asterisk-0.9.0/res/res_musiconhold.c
+--- asterisk-1.0.orig/res/res_musiconhold.c
++++ asterisk-1.0/res/res_musiconhold.c
 @@ -36,7 +36,7 @@
  #include <sys/stat.h>
  #include <dirent.h>
@@ -2006,3 +2006,7 @@ exit 0
  #endif
  #include <unistd.h>
  #include <sys/ioctl.h>
+--- asterisk-1.0.orig/.version
++++ asterisk-1.0/.version
+@@ -0,0 +1 @@
++CVS-05/31/04-22:00:51
