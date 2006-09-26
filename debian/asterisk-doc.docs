@@ -1,0 +1,10 @@
+BUGS
+asterisk.sgml
+README
+CREDITS
+HARDWARE
+SECURITY
+doc/*
+contrib
+images/*.gif
+images/*.jpg
