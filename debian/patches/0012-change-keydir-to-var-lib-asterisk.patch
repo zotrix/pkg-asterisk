@@ -1,0 +1,56 @@
+From: "Max N. Boyarov" <max.n.boyarov@gmail.com>
+Date: Thu, 20 Dec 2012 01:05:38 +0300
+Subject: change keydir to /var/lib/asterisk
+
+---
+ build_tools/make_defaults_h |    2 +-
+ main/asterisk.c             |    4 ++--
+ makeopts.in                 |    2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/build_tools/make_defaults_h b/build_tools/make_defaults_h
+index e6051e5..662efb2 100755
+--- a/build_tools/make_defaults_h
++++ b/build_tools/make_defaults_h
+@@ -20,7 +20,7 @@ cat << END
+ #define DEFAULT_DB         "${INSTALL_PATH}${ASTDBDIR}/astdb"
+ 
+ #define DEFAULT_DATA_DIR   "${INSTALL_PATH}${ASTDATADIR}"
+-#define DEFAULT_KEY_DIR    "${INSTALL_PATH}${ASTDATADIR}/keys"
++#define DEFAULT_KEY_DIR    "${INSTALL_PATH}${ASTVARLIBDIR}/keys"
+ 
+ #define DEFAULT_SPOOL_DIR  "${INSTALL_PATH}${ASTSPOOLDIR}"
+ #define DEFAULT_TMP_DIR    "${INSTALL_PATH}${ASTSPOOLDIR}/tmp"
+diff --git a/main/asterisk.c b/main/asterisk.c
+index 04f9b91..e7ab357 100644
+--- a/main/asterisk.c
++++ b/main/asterisk.c
+@@ -3176,13 +3176,13 @@ static void ast_readconfig(void)
+ 			ast_copy_string(cfg_paths.var_dir, v->value, sizeof(cfg_paths.var_dir));
+ 			if (!found.dbdir)
+ 				snprintf(cfg_paths.db_path, sizeof(cfg_paths.db_path), "%s/astdb", v->value);
++			if (!found.keydir)
++				snprintf(cfg_paths.key_dir, sizeof(cfg_paths.key_dir), "%s/keys", v->value);
+ 		} else if (!strcasecmp(v->name, "astdbdir")) {
+ 			snprintf(cfg_paths.db_path, sizeof(cfg_paths.db_path), "%s/astdb", v->value);
+ 			found.dbdir = 1;
+ 		} else if (!strcasecmp(v->name, "astdatadir")) {
+ 			ast_copy_string(cfg_paths.data_dir, v->value, sizeof(cfg_paths.data_dir));
+-			if (!found.keydir)
+-				snprintf(cfg_paths.key_dir, sizeof(cfg_paths.key_dir), "%s/keys", v->value);
+ 		} else if (!strcasecmp(v->name, "astkeydir")) {
+ 			snprintf(cfg_paths.key_dir, sizeof(cfg_paths.key_dir), "%s/keys", v->value);
+ 			found.keydir = 1;
+diff --git a/makeopts.in b/makeopts.in
+index 270f5f9..611294b 100644
+--- a/makeopts.in
++++ b/makeopts.in
+@@ -89,7 +89,7 @@ astvarlibdir = @astvarlibdir@
+ ASTVARLIBDIR = @astvarlibdir@
+ ASTDATADIR = /usr/share/asterisk
+ ASTDBDIR = @astdbdir@
+-ASTKEYDIR = @astkeydir@
++ASTKEYDIR = /var/lib/asterisk
+ ASTSPOOLDIR = @astspooldir@
+ ASTLOGDIR = @astlogdir@
+ ASTVARRUNDIR = @astvarrundir@

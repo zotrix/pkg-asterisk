@@ -1,0 +1,29 @@
+From: Debian VoIP Team <pkg-voip-maintainers@lists.alioth.debian.org>
+Date: Sat, 13 Apr 2013 18:01:01 +0300
+Subject: relax badshell tilde test
+
+badshell is disallowing tildes (~) in the DESTDIR directory to warn people
+who use a shell that doesn't expand it to $HOMEDIR.
+
+However, we have such a tilde in our directory (~rcN) that isn't expanded
+to $HOMEDIR nor shouldn't be.
+
+This patch relaxes this test just for cases where the ~ is followed by a '/',
+which should catch most cases.
+---
+ Makefile |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index fff621a..44bea9d 100644
+--- a/Makefile
++++ b/Makefile
+@@ -611,7 +611,7 @@ oldmodcheck:
+ 	fi
+ 
+ badshell:
+-ifneq ($(findstring ~,$(DESTDIR)),)
++ifneq ($(findstring ~/,$(DESTDIR)),)
+ 	@echo "Your shell doesn't do ~ expansion when expected (specifically, when doing \"make install DESTDIR=~/path\")."
+ 	@echo "Try replacing ~ with \$$HOME, as in \"make install DESTDIR=\$$HOME/path\"."
+ 	@exit 1

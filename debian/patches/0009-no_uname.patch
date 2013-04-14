@@ -1,0 +1,30 @@
+From: Tzafrir Cohen <tzafrir@debian.org>
+Date: Sat, 13 Apr 2013 18:41:25 +0300
+Subject: no_uname
+
+Author: Tzafrir Cohen <tzafrir@debian.org>
+Bug: https://issues.asterisk.org/view.php?id=17161
+Forwarded-Upstream: no
+
+Remove the special case for BSD in the bootstrap script. This is a
+simple brute-force patch until I figure out why that specific version
+of autoconf is needed on BSD.
+---
+ bootstrap.sh |    4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/bootstrap.sh b/bootstrap.sh
+index 3497e24..e10947f 100755
+--- a/bootstrap.sh
++++ b/bootstrap.sh
+@@ -21,10 +21,6 @@ case `uname -sr` in
+ 		export AUTOCONF_VERSION=2.63
+ 		export AUTOMAKE_VERSION=1.9
+ 		;;
+-	*'BSD'*)
+-		MY_AC_VER=-2.62
+-		MY_AM_VER=-1.9
+-		;;
+ 	*'SunOS '*)
+ 		MY_AC_VER=
+ 		MY_AM_VER=-1.9

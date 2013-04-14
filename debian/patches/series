@@ -1,25 +1,14 @@
-# upstream fixes
-allow-tilde-destdir
-
-hack-multiple-app-voicemail
-# Not used ATM. See comment in patch:
-#make-clean-fixes
-safe_asterisk-config
-safe_asterisk-nobg
-#
-#h323-no-deps-on-asterisk
-#h323-workaround-openh323-segfault
-
-astgenkey-security
-
-reinclude_docs
-
-# bugfixes on top of everything
-sound_files
-#h323-extra-target
-mpglib
-enable_addons
-no_uname
-kfreebsd
-
-sparc32_disable
+0001-relax-badshell-tilde-test.patch
+0002-build-multiple-versions-of-app_voicemail.so.patch
+0003-use-etc-default-settings-for-configuring-safe_asteri.patch
+0004-Add-an-option-to-safe_asterisk-so-that-it-won-t-back.patch
+0005-astgenkey-should-generate-a-private-key-that-is-not-.patch
+0006-Avoid-downloading-extra-sound-files.patch
+0007-addons-mp3.patch
+0008-enable-addons-modules.patch
+0009-no_uname.patch
+0010-dont-enable-O6.patch
+0011-change-Data-dir-to-usr-share.patch
+0012-change-keydir-to-var-lib-asterisk.patch
+0013-Change-agi-bin-dir-to-usr-lib.patch
+0014-respect-build-system-cflags.patch

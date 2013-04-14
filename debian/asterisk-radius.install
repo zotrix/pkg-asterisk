@@ -1,0 +1,2 @@
+usr/lib/asterisk/modules/cel_radius.so
+usr/lib/asterisk/modules/cdr_radius.so

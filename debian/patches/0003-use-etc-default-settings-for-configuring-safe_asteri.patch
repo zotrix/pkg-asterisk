@@ -1,0 +1,37 @@
+From: Faidon Liambotis <paravoid@debian.org>
+Date: Sat, 13 Apr 2013 18:18:51 +0300
+Subject: use /etc/default/settings for configuring safe_asterisk (vendor
+ specific)
+
+Author: Faidon Liambotis <paravoid@debian.org>
+Bug-Debian: http://bugs.debian.org/381786
+Last-Update: 2010-02-14
+
+Use ASTSAFE_TTY and ASTSAFE_CONSOLE from /etc/default/asterisk to configure
+safe_asterisk.
+---
+ contrib/scripts/safe_asterisk |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/contrib/scripts/safe_asterisk b/contrib/scripts/safe_asterisk
+index 2e661b4..ba9f827 100644
+--- a/contrib/scripts/safe_asterisk
++++ b/contrib/scripts/safe_asterisk
+@@ -109,7 +109,7 @@ ulimit -c unlimited
+ # Don't fork when running "safely"
+ #
+ ASTARGS=""
+-if test "x$TTY" != "x" ; then
++if test "x$TTY" != "xno" ; then
+ 	if test -c /dev/tty${TTY} ; then
+ 		TTY=tty${TTY}
+ 	elif test -c /dev/vc/${TTY} ; then
+@@ -159,7 +159,7 @@ run_asterisk()
+ {
+ 	while :; do 
+ 
+-		if test "x$TTY" != "x" ; then
++		if test "x$TTY" != "xno" ; then
+ 			cd "${RUNDIR}"
+ 			stty sane < /dev/${TTY}
+ 			nice -n $PRIORITY ${ASTSBINDIR}/asterisk -f ${CLIARGS} ${ASTARGS} > /dev/${TTY} 2>&1 < /dev/${TTY}

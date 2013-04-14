@@ -1,0 +1,27 @@
+From: Lionel Elie Mamane <lionel@mamane.lu>
+Date: Sat, 13 Apr 2013 18:27:12 +0300
+Subject: astgenkey should generate a private key that is not world-readable
+
+Author: Lionel Elie Mamane <lionel@mamane.lu>
+Bug: http://issues.asterisk.org/view.php?id=12373
+Last-Update: 2009-12-19
+---
+ contrib/scripts/astgenkey |    4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/contrib/scripts/astgenkey b/contrib/scripts/astgenkey
+index 6376048..be8853c 100644
+--- a/contrib/scripts/astgenkey
++++ b/contrib/scripts/astgenkey
+@@ -47,7 +47,11 @@ done
+ rm -f ${KEY}.key ${KEY}.pub
+ 
+ echo "Generating SSL key '$KEY': "
++oldumask="`umask`"
++umask 0077
+ openssl genrsa -out ${KEY}.key ${DES3} 1024
++[ "$(id -u)" = 0 ] && chown asterisk: ${KEY}.key
++umask $oldumask
+ openssl rsa -in ${KEY}.key -pubout -out ${KEY}.pub
+ 
+ if [ -f "${KEY}.key" ] && [ -f "${KEY}.pub" ]; then
