@@ -1,0 +1,3 @@
+asterisk1.8-xmpp: hardening-no-fortify-functions usr/lib/asterisk/modules/chan_gtalk.so
+asterisk1.8-xmpp: hardening-no-fortify-functions usr/lib/asterisk/modules/chan_jingle.so
+asterisk1.8-xmpp: hardening-no-fortify-functions usr/lib/asterisk/modules/res_jabber.so

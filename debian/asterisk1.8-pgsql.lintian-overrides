@@ -1,0 +1,3 @@
+asterisk1.8-pgsql: hardening-no-fortify-functions usr/lib/asterisk/modules/cdr_pgsql.so
+asterisk1.8-pgsql: hardening-no-fortify-functions usr/lib/asterisk/modules/cel_pgsql.so
+asterisk1.8-pgsql: hardening-no-fortify-functions usr/lib/asterisk/modules/res_config_pgsql.so

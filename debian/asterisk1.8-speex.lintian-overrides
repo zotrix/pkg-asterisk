@@ -1,0 +1,2 @@
+asterisk1.8-speex: hardening-no-fortify-functions usr/lib/asterisk/modules/codec_speex.so
+asterisk1.8-speex: hardening-no-fortify-functions usr/lib/asterisk/modules/func_speex.so

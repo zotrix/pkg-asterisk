@@ -1,1 +1,4 @@
-asterisk: package-contains-empty-directory
+asterisk1.8: package-contains-empty-directory
+asterisk1.8: hardening-no-fortify-functions usr/sbin/astcanary
+asterisk1.8: hardening-no-fortify-functions usr/sbin/asterisk
+asterisk1.8: hardening-no-fortify-functions usr/sbin/astman

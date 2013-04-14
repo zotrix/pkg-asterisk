@@ -1,0 +1,2 @@
+asterisk1.8-mp3: hardening-no-fortify-functions usr/lib/asterisk/modules/app_mp3.so
+asterisk1.8-mp3: hardening-no-fortify-functions usr/lib/asterisk/modules/format_mp3.so

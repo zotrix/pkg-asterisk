@@ -1,0 +1,1 @@
+asterisk1.8-vpb: hardening-no-fortify-functions usr/lib/asterisk/modules/chan_vpb.so

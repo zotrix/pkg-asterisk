@@ -1,0 +1,1 @@
+asterisk1.8-snmp: hardening-no-fortify-functions usr/lib/asterisk/modules/res_snmp.so

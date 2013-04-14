@@ -1,0 +1,2 @@
+asterisk1.8-curl: hardening-no-fortify-functions usr/lib/asterisk/modules/func_curl.so
+asterisk1.8-curl: hardening-no-fortify-functions usr/lib/asterisk/modules/res_config_curl.so

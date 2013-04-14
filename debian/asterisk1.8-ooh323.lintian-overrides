@@ -1,0 +1,1 @@
+asterisk1.8-ooh323: hardening-no-fortify-functions usr/lib/asterisk/modules/chan_ooh323.so

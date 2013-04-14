@@ -1,0 +1,1 @@
+asterisk1.8-lua: hardening-no-fortify-functions usr/lib/asterisk/modules/pbx_lua.so

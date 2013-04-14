@@ -1,0 +1,5 @@
+asterisk1.8-calendar: hardening-no-fortify-functions usr/lib/asterisk/modules/res_calendar.so
+asterisk1.8-calendar: hardening-no-fortify-functions usr/lib/asterisk/modules/res_calendar_caldav.so
+asterisk1.8-calendar: hardening-no-fortify-functions usr/lib/asterisk/modules/res_calendar_ews.so
+asterisk1.8-calendar: hardening-no-fortify-functions usr/lib/asterisk/modules/res_calendar_exchange.so
+asterisk1.8-calendar: hardening-no-fortify-functions usr/lib/asterisk/modules/res_calendar_icalendar.so

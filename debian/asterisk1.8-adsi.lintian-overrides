@@ -1,0 +1,2 @@
+asterisk1.8-adsi: hardening-no-fortify-functions usr/lib/asterisk/modules/app_adsiprog.so
+asterisk1.8-adsi: hardening-no-fortify-functions usr/lib/asterisk/modules/res_adsi.so

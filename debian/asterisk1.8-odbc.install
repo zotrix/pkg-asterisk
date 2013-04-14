@@ -1,4 +1,3 @@
-usr/lib/asterisk/modules/app_voicemail_odbcstorage.so
 usr/lib/asterisk/modules/cdr_adaptive_odbc.so
 usr/lib/asterisk/modules/cdr_odbc.so
 usr/lib/asterisk/modules/cel_odbc.so

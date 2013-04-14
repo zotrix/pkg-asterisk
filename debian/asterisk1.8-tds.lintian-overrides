@@ -1,0 +1,2 @@
+asterisk1.8-tds: hardening-no-fortify-functions usr/lib/asterisk/modules/cdr_tds.so
+asterisk1.8-tds: hardening-no-fortify-functions usr/lib/asterisk/modules/cel_tds.so

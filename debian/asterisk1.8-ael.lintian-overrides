@@ -1,0 +1,2 @@
+asterisk1.8-ael: hardening-no-fortify-functions usr/lib/asterisk/modules/pbx_ael.so
+asterisk1.8-ael: hardening-no-fortify-functions usr/lib/asterisk/modules/res_ael_share.so

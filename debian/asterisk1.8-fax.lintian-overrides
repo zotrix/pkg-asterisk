@@ -1,0 +1,1 @@
+asterisk1.8-fax: hardening-no-fortify-functions usr/lib/asterisk/modules/res_fax.so

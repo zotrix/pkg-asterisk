@@ -1,0 +1,1 @@
+asterisk1.8-voicemail: hardening-no-fortify-functions usr/lib/asterisk/modules/app_voicemail.so

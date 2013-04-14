@@ -1,0 +1,4 @@
+asterisk1.8-dahdi: hardening-no-fortify-functions usr/lib/asterisk/modules/app_dahdibarge.so
+asterisk1.8-dahdi: hardening-no-fortify-functions usr/lib/asterisk/modules/app_meetme.so
+asterisk1.8-dahdi: hardening-no-fortify-functions usr/lib/asterisk/modules/chan_dahdi.so
+asterisk1.8-dahdi: hardening-no-fortify-functions usr/lib/asterisk/modules/codec_dahdi.so
