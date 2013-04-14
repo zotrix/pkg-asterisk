@@ -1,11 +1,16 @@
-Subject: use /etc/default/settings for configuring safe_asterisk (vendor specific)
-Author: Faidon Liambotis <paravoid@debian.org>
-Bug-Debian: http://bugs.debian.org/381786
-Last-Update: 2010-02-14
+From: "Max N. Boyarov" <max.n.boyarov@gmail.com>
+Date: Sun, 14 Apr 2013 18:31:59 +0300
+Subject: use /etc/default/settings for configuring safe_asterisk (vendor
+ specific)
 
 Use ASTSAFE_TTY and ASTSAFE_CONSOLE from /etc/default/asterisk to configure
 safe_asterisk.
+---
+ contrib/scripts/safe_asterisk |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/contrib/scripts/safe_asterisk b/contrib/scripts/safe_asterisk
+index 64c41b4..ee4b684 100644
 --- a/contrib/scripts/safe_asterisk
 +++ b/contrib/scripts/safe_asterisk
 @@ -105,7 +105,7 @@ ulimit -c unlimited

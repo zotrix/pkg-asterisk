@@ -1,3 +1,7 @@
+From: "Max N. Boyarov" <max.n.boyarov@gmail.com>
+Date: Sat, 13 Apr 2013 18:33:30 +0300
+Subject: addons mp3
+
 Description: mpglib code originally in asterisk-addons
 Origin:  http://svn.digium.com/svn/thirdparty/mp3/trunk
 
@@ -7,10 +11,145 @@ with asterisk, that code is no longer included and needs to be fetched
 source (rev. 180).
 
 TODO: get rid of this code and use libmpg123 or whatever.
+---
+ addons/format_mp3.c      |    1 -
+ addons/mp3/MPGLIB_README |   39 +
+ addons/mp3/MPGLIB_TODO   |    2 +
+ addons/mp3/Makefile      |   24 +
+ addons/mp3/README        |    1 +
+ addons/mp3/common.c      |  267 ++++++
+ addons/mp3/dct64_i386.c  |  335 ++++++++
+ addons/mp3/decode_i386.c |  153 ++++
+ addons/mp3/decode_ntom.c |  219 +++++
+ addons/mp3/huffman.h     |  332 ++++++++
+ addons/mp3/interface.c   |  323 ++++++++
+ addons/mp3/layer3.c      | 2029 ++++++++++++++++++++++++++++++++++++++++++++++
+ addons/mp3/mpg123.h      |  132 +++
+ addons/mp3/mpglib.h      |   75 ++
+ addons/mp3/tabinit.c     |   81 ++
+ 15 files changed, 4012 insertions(+), 1 deletion(-)
+ create mode 100644 addons/mp3/MPGLIB_README
+ create mode 100644 addons/mp3/MPGLIB_TODO
+ create mode 100644 addons/mp3/Makefile
+ create mode 100644 addons/mp3/README
+ create mode 100644 addons/mp3/common.c
+ create mode 100644 addons/mp3/dct64_i386.c
+ create mode 100644 addons/mp3/decode_i386.c
+ create mode 100644 addons/mp3/decode_ntom.c
+ create mode 100644 addons/mp3/huffman.h
+ create mode 100644 addons/mp3/interface.c
+ create mode 100644 addons/mp3/layer3.c
+ create mode 100644 addons/mp3/mpg123.h
+ create mode 100644 addons/mp3/mpglib.h
+ create mode 100644 addons/mp3/tabinit.c
 
-diff -Nur a/addons/mp3/common.c b/addons/mp3/common.c
---- a/addons/mp3/common.c	1970-01-01 02:00:00.000000000 +0200
-+++ b/addons/mp3/common.c	2010-08-03 21:17:14.000000000 +0300
+diff --git a/addons/format_mp3.c b/addons/format_mp3.c
+index 8d269f3..fe0ac0e 100644
+--- a/addons/format_mp3.c
++++ b/addons/format_mp3.c
+@@ -28,7 +28,6 @@
+  */
+ 
+ /*** MODULEINFO
+-	<defaultenabled>no</defaultenabled>
+ 	<support_level>extended</support_level>
+  ***/
+ 
+diff --git a/addons/mp3/MPGLIB_README b/addons/mp3/MPGLIB_README
+new file mode 100644
+index 0000000..3c5f337
+--- /dev/null
++++ b/addons/mp3/MPGLIB_README
+@@ -0,0 +1,39 @@
++MP3 library
++-----------
++Version 0.2
++
++This decoder is a 'light' version (thrown out all unnecessay parts)
++from the mpg123 package. I made this for a company.
++
++Currently only Layer3 is enabled to save some space. Layer1,2 isn't
++tested at all. The interface will not change significantly. 
++A backport to the mpg123 package is planed.
++
++comiled and tested only on Solaris 2.6
++main.c contains a simple demo application for library.
++
++COPYING: you may use this source under GPL terms!
++
++PLEASE NOTE: This software may contain patented alogrithm (at least
++  patented in some countries). It may be not allowed to sell/use products
++  based on this source code in these countries. Check this out first!
++
++COPYRIGHT of MP3 music:
++  Please note, that the duplicating of copyrighted music without explicit
++  permission violates the rights of the owner.
++
++SENDING PATCHES:
++  Maybe I change the copyright policy (ie some kind of more free BSD licencse).
++  Please consider this when sending patches/changes.
++  I also want to have the freedom to sell the code to companies that
++  can not use the code under GPL. So, if you send me significant patches,
++  I need your explicit permission to do this. Of course, there will also 
++  be the GPLed open source version of the 100% same code.
++  For the case you cannot accept this: the code is GPL, it's your freedom 
++  to distribute your changes again under GPL. 
++
++FEEDBACK:
++  I'm interessted to here from you, when you use this package as part
++  of another project.
++
++
+diff --git a/addons/mp3/MPGLIB_TODO b/addons/mp3/MPGLIB_TODO
+new file mode 100644
+index 0000000..4037110
+--- /dev/null
++++ b/addons/mp3/MPGLIB_TODO
+@@ -0,0 +1,2 @@
++
++apply 'VBR' bugfix
+diff --git a/addons/mp3/Makefile b/addons/mp3/Makefile
+new file mode 100644
+index 0000000..7cd0b58
+--- /dev/null
++++ b/addons/mp3/Makefile
+@@ -0,0 +1,24 @@
++MP3OBJS=common.o dct64_i386.o decode_ntom.o layer3.o tabinit.o interface.o
++
++ifeq ($(OSARCH),FreeBSD)
++OSVERSION=$(shell make -V OSVERSION -f /usr/share/mk/bsd.port.subdir.mk)
++CFLAGS+=$(if $(OSVERSION)<500016,-D_THREAD_SAFE)
++LIBS+=$(if $(OSVERSION)<502102,-lc_r,-pthread)
++INCLUDE+=-I/usr/local/include
++CFLAGS+=$(shell if [ -d /usr/local/include/spandsp ]; then echo "-I/usr/local/include/spandsp"; fi)
++endif # FreeBSD
++
++ifeq ($(OSARCH),NetBSD)
++CFLAGS+=-pthread
++INCLUDE+=-I/usr/local/include
++endif
++
++ifeq ($(OSARCH),OpenBSD)
++CFLAGS+=-pthread
++endif
++
++all: $(MP3OBJS)
++
++clean:
++	rm -f *.o *.so *~
++	rm -f .*.o.d
+diff --git a/addons/mp3/README b/addons/mp3/README
+new file mode 100644
+index 0000000..8b13789
+--- /dev/null
++++ b/addons/mp3/README
+@@ -0,0 +1 @@
++
+diff --git a/addons/mp3/common.c b/addons/mp3/common.c
+new file mode 100644
+index 0000000..9a6fd8c
+--- /dev/null
++++ b/addons/mp3/common.c
 @@ -0,0 +1,267 @@
 +#include "asterisk.h"
 +#include "asterisk/logger.h"
@@ -279,9 +418,11 @@ diff -Nur a/addons/mp3/common.c b/addons/mp3/common.c
 +
 +
 +
-diff -Nur a/addons/mp3/dct64_i386.c b/addons/mp3/dct64_i386.c
---- a/addons/mp3/dct64_i386.c	1970-01-01 02:00:00.000000000 +0200
-+++ b/addons/mp3/dct64_i386.c	2010-08-03 21:17:14.000000000 +0300
+diff --git a/addons/mp3/dct64_i386.c b/addons/mp3/dct64_i386.c
+new file mode 100644
+index 0000000..c6b5d88
+--- /dev/null
++++ b/addons/mp3/dct64_i386.c
 @@ -0,0 +1,335 @@
 +
 +/*
@@ -618,9 +759,11 @@ diff -Nur a/addons/mp3/dct64_i386.c b/addons/mp3/dct64_i386.c
 +  dct64_1(a,b,bufs,bufs+0x20,c);
 +}
 +
-diff -Nur a/addons/mp3/decode_i386.c b/addons/mp3/decode_i386.c
---- a/addons/mp3/decode_i386.c	1970-01-01 02:00:00.000000000 +0200
-+++ b/addons/mp3/decode_i386.c	2010-08-03 21:17:14.000000000 +0300
+diff --git a/addons/mp3/decode_i386.c b/addons/mp3/decode_i386.c
+new file mode 100644
+index 0000000..83e0544
+--- /dev/null
++++ b/addons/mp3/decode_i386.c
 @@ -0,0 +1,153 @@
 +/* 
 + * Mpeg Layer-1,2,3 audio decoder 
@@ -775,9 +918,11 @@ diff -Nur a/addons/mp3/decode_i386.c b/addons/mp3/decode_i386.c
 +  return clip;
 +}
 +
-diff -Nur a/addons/mp3/decode_ntom.c b/addons/mp3/decode_ntom.c
---- a/addons/mp3/decode_ntom.c	1970-01-01 02:00:00.000000000 +0200
-+++ b/addons/mp3/decode_ntom.c	2010-08-03 21:17:14.000000000 +0300
+diff --git a/addons/mp3/decode_ntom.c b/addons/mp3/decode_ntom.c
+new file mode 100644
+index 0000000..e6b10a4
+--- /dev/null
++++ b/addons/mp3/decode_ntom.c
 @@ -0,0 +1,219 @@
 +/* 
 + * Mpeg Layer-1,2,3 audio decoder 
@@ -998,9 +1143,11 @@ diff -Nur a/addons/mp3/decode_ntom.c b/addons/mp3/decode_ntom.c
 +}
 +
 +
-diff -Nur a/addons/mp3/huffman.h b/addons/mp3/huffman.h
---- a/addons/mp3/huffman.h	1970-01-01 02:00:00.000000000 +0200
-+++ b/addons/mp3/huffman.h	2010-08-03 21:17:14.000000000 +0300
+diff --git a/addons/mp3/huffman.h b/addons/mp3/huffman.h
+new file mode 100644
+index 0000000..7fec0d5
+--- /dev/null
++++ b/addons/mp3/huffman.h
 @@ -0,0 +1,332 @@
 +/*
 + * huffman tables ... recalcualted to work with my optimzed
@@ -1334,9 +1481,11 @@ diff -Nur a/addons/mp3/huffman.h b/addons/mp3/huffman.h
 +};
 +
 +
-diff -Nur a/addons/mp3/interface.c b/addons/mp3/interface.c
---- a/addons/mp3/interface.c	1970-01-01 02:00:00.000000000 +0200
-+++ b/addons/mp3/interface.c	2010-08-03 21:17:14.000000000 +0300
+diff --git a/addons/mp3/interface.c b/addons/mp3/interface.c
+new file mode 100644
+index 0000000..a71d15d
+--- /dev/null
++++ b/addons/mp3/interface.c
 @@ -0,0 +1,323 @@
 +#include "asterisk.h"
 +#include "asterisk/logger.h"
@@ -1661,9 +1810,11 @@ diff -Nur a/addons/mp3/interface.c b/addons/mp3/interface.c
 +
 +
 +
-diff -Nur a/addons/mp3/layer3.c b/addons/mp3/layer3.c
---- a/addons/mp3/layer3.c	1970-01-01 02:00:00.000000000 +0200
-+++ b/addons/mp3/layer3.c	2010-08-03 21:17:14.000000000 +0300
+diff --git a/addons/mp3/layer3.c b/addons/mp3/layer3.c
+new file mode 100644
+index 0000000..e635576
+--- /dev/null
++++ b/addons/mp3/layer3.c
 @@ -0,0 +1,2029 @@
 +/* 
 + * Mpeg Layer-3 audio decoder 
@@ -3694,37 +3845,11 @@ diff -Nur a/addons/mp3/layer3.c b/addons/mp3/layer3.c
 +}
 +
 +
-diff -Nur a/addons/mp3/Makefile b/addons/mp3/Makefile
---- a/addons/mp3/Makefile	1970-01-01 02:00:00.000000000 +0200
-+++ b/addons/mp3/Makefile	2010-08-03 21:17:14.000000000 +0300
-@@ -0,0 +1,24 @@
-+MP3OBJS=common.o dct64_i386.o decode_ntom.o layer3.o tabinit.o interface.o
-+
-+ifeq ($(OSARCH),FreeBSD)
-+OSVERSION=$(shell make -V OSVERSION -f /usr/share/mk/bsd.port.subdir.mk)
-+CFLAGS+=$(if $(OSVERSION)<500016,-D_THREAD_SAFE)
-+LIBS+=$(if $(OSVERSION)<502102,-lc_r,-pthread)
-+INCLUDE+=-I/usr/local/include
-+CFLAGS+=$(shell if [ -d /usr/local/include/spandsp ]; then echo "-I/usr/local/include/spandsp"; fi)
-+endif # FreeBSD
-+
-+ifeq ($(OSARCH),NetBSD)
-+CFLAGS+=-pthread
-+INCLUDE+=-I/usr/local/include
-+endif
-+
-+ifeq ($(OSARCH),OpenBSD)
-+CFLAGS+=-pthread
-+endif
-+
-+all: $(MP3OBJS)
-+
-+clean:
-+	rm -f *.o *.so *~
-+	rm -f .*.o.d
-diff -Nur a/addons/mp3/mpg123.h b/addons/mp3/mpg123.h
---- a/addons/mp3/mpg123.h	1970-01-01 02:00:00.000000000 +0200
-+++ b/addons/mp3/mpg123.h	2010-08-03 21:17:14.000000000 +0300
+diff --git a/addons/mp3/mpg123.h b/addons/mp3/mpg123.h
+new file mode 100644
+index 0000000..e607cc2
+--- /dev/null
++++ b/addons/mp3/mpg123.h
 @@ -0,0 +1,132 @@
 +#include        <stdio.h>
 +#include        <string.h>
@@ -3858,9 +3983,11 @@ diff -Nur a/addons/mp3/mpg123.h b/addons/mp3/mpg123.h
 +extern struct parameter param;
 +extern real *pnts[5];
 +
-diff -Nur a/addons/mp3/mpglib.h b/addons/mp3/mpglib.h
---- a/addons/mp3/mpglib.h	1970-01-01 02:00:00.000000000 +0200
-+++ b/addons/mp3/mpglib.h	2010-08-03 21:17:14.000000000 +0300
+diff --git a/addons/mp3/mpglib.h b/addons/mp3/mpglib.h
+new file mode 100644
+index 0000000..0613222
+--- /dev/null
++++ b/addons/mp3/mpglib.h
 @@ -0,0 +1,75 @@
 +
 +struct buf {
@@ -3937,63 +4064,11 @@ diff -Nur a/addons/mp3/mpglib.h b/addons/mp3/mpglib.h
 +extern unsigned int   getbits_fast(struct mpstr *mp, int);
 +extern int set_pointer(struct mpstr *mp, long backstep);
 +
-diff -Nur a/addons/mp3/MPGLIB_README b/addons/mp3/MPGLIB_README
---- a/addons/mp3/MPGLIB_README	1970-01-01 02:00:00.000000000 +0200
-+++ b/addons/mp3/MPGLIB_README	2010-08-03 21:17:14.000000000 +0300
-@@ -0,0 +1,39 @@
-+MP3 library
-+-----------
-+Version 0.2
-+
-+This decoder is a 'light' version (thrown out all unnecessay parts)
-+from the mpg123 package. I made this for a company.
-+
-+Currently only Layer3 is enabled to save some space. Layer1,2 isn't
-+tested at all. The interface will not change significantly. 
-+A backport to the mpg123 package is planed.
-+
-+comiled and tested only on Solaris 2.6
-+main.c contains a simple demo application for library.
-+
-+COPYING: you may use this source under GPL terms!
-+
-+PLEASE NOTE: This software may contain patented alogrithm (at least
-+  patented in some countries). It may be not allowed to sell/use products
-+  based on this source code in these countries. Check this out first!
-+
-+COPYRIGHT of MP3 music:
-+  Please note, that the duplicating of copyrighted music without explicit
-+  permission violates the rights of the owner.
-+
-+SENDING PATCHES:
-+  Maybe I change the copyright policy (ie some kind of more free BSD licencse).
-+  Please consider this when sending patches/changes.
-+  I also want to have the freedom to sell the code to companies that
-+  can not use the code under GPL. So, if you send me significant patches,
-+  I need your explicit permission to do this. Of course, there will also 
-+  be the GPLed open source version of the 100% same code.
-+  For the case you cannot accept this: the code is GPL, it's your freedom 
-+  to distribute your changes again under GPL. 
-+
-+FEEDBACK:
-+  I'm interessted to here from you, when you use this package as part
-+  of another project.
-+
-+
-diff -Nur a/addons/mp3/MPGLIB_TODO b/addons/mp3/MPGLIB_TODO
---- a/addons/mp3/MPGLIB_TODO	1970-01-01 02:00:00.000000000 +0200
-+++ b/addons/mp3/MPGLIB_TODO	2010-08-03 21:17:14.000000000 +0300
-@@ -0,0 +1,2 @@
-+
-+apply 'VBR' bugfix
-diff -Nur a/addons/mp3/README b/addons/mp3/README
---- a/addons/mp3/README	1970-01-01 02:00:00.000000000 +0200
-+++ b/addons/mp3/README	2010-08-03 21:17:14.000000000 +0300
-@@ -0,0 +1 @@
-+
-diff -Nur a/addons/mp3/tabinit.c b/addons/mp3/tabinit.c
---- a/addons/mp3/tabinit.c	1970-01-01 02:00:00.000000000 +0200
-+++ b/addons/mp3/tabinit.c	2010-08-03 21:17:14.000000000 +0300
+diff --git a/addons/mp3/tabinit.c b/addons/mp3/tabinit.c
+new file mode 100644
+index 0000000..d3e49f5
+--- /dev/null
++++ b/addons/mp3/tabinit.c
 @@ -0,0 +1,81 @@
 +
 +#include <stdlib.h>

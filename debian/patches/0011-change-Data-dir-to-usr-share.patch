@@ -1,0 +1,34 @@
+From: "Max N. Boyarov" <max.n.boyarov@gmail.com>
+Date: Sun, 14 Apr 2013 18:37:25 +0300
+Subject: change Data dir to usr/share
+
+---
+ Makefile    |    1 +
+ makeopts.in |    2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 6359a9a..866b4ad 100644
+--- a/Makefile
++++ b/Makefile
+@@ -50,6 +50,7 @@ export ASTVARRUNDIR
+ export MODULES_DIR
+ export ASTSPOOLDIR
+ export ASTVARLIBDIR
++ASTDATADIR?=/usr/share/asterisk
+ export ASTDATADIR
+ export ASTDBDIR
+ export ASTLOGDIR
+diff --git a/makeopts.in b/makeopts.in
+index 6418428..cf093f3 100644
+--- a/makeopts.in
++++ b/makeopts.in
+@@ -84,7 +84,7 @@ ASTLIBDIR = @astlibdir@
+ ASTMANDIR = @astmandir@
+ astvarlibdir = @astvarlibdir@
+ ASTVARLIBDIR = @astvarlibdir@
+-ASTDATADIR = @astdatadir@
++ASTDATADIR = /usr/share/asterisk
+ ASTDBDIR = @astdbdir@
+ ASTKEYDIR = @astkeydir@
+ ASTSPOOLDIR = @astspooldir@

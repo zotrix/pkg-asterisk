@@ -1,0 +1,39 @@
+From: "Max N. Boyarov" <max.n.boyarov@gmail.com>
+Date: Thu, 20 Dec 2012 00:56:55 +0300
+Subject: dont enable O6
+
+---
+ Makefile.rules |   13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
+
+diff --git a/Makefile.rules b/Makefile.rules
+index 5b4dfab..7db66de 100644
+--- a/Makefile.rules
++++ b/Makefile.rules
+@@ -35,7 +35,7 @@ else
+     CMD_PREFIX=
+ endif
+ 
+-OPTIMIZE?=-O6
++#OPTIMIZE?=-O6
+ ifneq ($(findstring darwin,$(OSARCH)),)
+   ifeq ($(shell if test `/usr/bin/sw_vers -productVersion | cut -c4` -gt 5; then echo 6; else echo 0; fi),6)
+     # Snow Leopard/Lion has an issue with this optimization flag on large files (like chan_sip)
+@@ -43,11 +43,12 @@ ifneq ($(findstring darwin,$(OSARCH)),)
+   endif
+ endif
+ 
+-ifeq ($(findstring DONT_OPTIMIZE,$(MENUSELECT_CFLAGS))$(AST_CODE_COVERAGE),no)
+-    _ASTCFLAGS+=$(OPTIMIZE)
+-else
+-    _ASTCFLAGS+=-O0
+-endif
++# Don't Optimize for Debian Build, just use provided cflags
++# ifeq ($(findstring DONT_OPTIMIZE,$(MENUSELECT_CFLAGS))$(AST_CODE_COVERAGE),no)
++#     _ASTCFLAGS+=$(OPTIMIZE)
++# else
++#     _ASTCFLAGS+=-O0
++# endif
+ 
+ ifeq ($(AST_CODE_COVERAGE),yes)
+     _ASTCFLAGS+=-ftest-coverage -fprofile-arcs

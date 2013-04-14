@@ -1,0 +1,5 @@
+debian/tmp/usr/share/man/man8/asterisk.8
+debian/tmp/usr/share/man/man8/astgenkey.8
+debian/tmp/usr/share/man/man8/autosupport.8
+debian/tmp/usr/share/man/man8/safe_asterisk.8
+debian/astman.1

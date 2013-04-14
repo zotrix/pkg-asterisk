@@ -1,0 +1,32 @@
+From: "Max N. Boyarov" <max.n.boyarov@gmail.com>
+Date: Sun, 14 Apr 2013 18:39:29 +0300
+Subject: Change agi-bin dir to usr/lib
+
+agi-bin contains user unmodificable arch dependend files so
+move to use/lib
+---
+ Makefile |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 866b4ad..b57b96c 100644
+--- a/Makefile
++++ b/Makefile
+@@ -58,7 +58,7 @@ export ASTLIBDIR
+ export ASTMANDIR
+ export ASTHEADERDIR
+ export ASTSBINDIR
+-export AGI_DIR
++export AGI_DIR?=/usr/lib/asterisk
+ export ASTCONFPATH
+ export ASTKEYDIR
+ 
+@@ -128,7 +128,7 @@ DEBUG=-g3
+ # when starting Asterisk
+ ASTCONFPATH=$(ASTETCDIR)/asterisk.conf
+ MODULES_DIR=$(ASTLIBDIR)/modules
+-AGI_DIR=$(ASTDATADIR)/agi-bin
++AGI_DIR=$(ASTLIBDIR)/asterisk/agi-bin
+ 
+ # If you use Apache, you may determine by a grep 'DocumentRoot' of your httpd.conf file
+ HTTP_DOCSDIR=/var/www/html

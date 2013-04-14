@@ -1,0 +1,42 @@
+From: "Max N. Boyarov" <max.n.boyarov@gmail.com>
+Date: Sat, 13 Apr 2013 18:53:13 +0300
+Subject: respect build system cflags
+
+---
+ Makefile               |    2 +-
+ build_tools/cflags.xml |    3 ++-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index b57b96c..365ffb9 100644
+--- a/Makefile
++++ b/Makefile
+@@ -122,7 +122,7 @@ ASTTOPDIR:=$(subst $(space),\$(space),$(CURDIR))
+ OVERWRITE=y
+ 
+ # Include debug and macro symbols in the executables (-g) and profiling info (-pg)
+-DEBUG=-g3
++#DEBUG=-g3
+ 
+ # Asterisk.conf is located in ASTETCDIR or by using the -C flag
+ # when starting Asterisk
+diff --git a/build_tools/cflags.xml b/build_tools/cflags.xml
+index 99ac5d1..0a8ed10 100644
+--- a/build_tools/cflags.xml
++++ b/build_tools/cflags.xml
+@@ -1,5 +1,6 @@
+ 	<category name="MENUSELECT_CFLAGS" displayname="Compiler Flags" positive_output="yes" remove_on_change=".lastclean">
+ 		<member name="DONT_OPTIMIZE" displayname="Disable Optimizations by the Compiler">
++			<defaultenabled>yes</defaultenabled>
+ 			<support_level>core</support_level>
+ 		</member>
+ 		<member name="DEBUG_THREADS" displayname="Enable Thread Debugging">
+@@ -82,7 +83,7 @@
+ 		</member>
+ 		<member name="BUILD_NATIVE" displayname="Allow compiler to generate code optimized for the CPU on which the build is performed.">
+ 			<support_level>core</support_level>
+-			<defaultenabled>yes</defaultenabled>
++			<defaultenabled>no</defaultenabled>
+ 			<depend>native_arch</depend>
+ 		</member>
+ 	</category>

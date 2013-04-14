@@ -1,4 +1,7 @@
+From: Faidon Liambotis <paravoid@debian.org>
+Date: Sun, 14 Apr 2013 18:30:29 +0300
 Subject: build multiple versions of app_voicemail.so
+
 Author: Faidon Liambotis <paravoid@debian.org>
 Bug: http://issues.asterisk.org/view.php?id=13822
 Last-Update: 2010-12-24
@@ -15,7 +18,26 @@ packages.
 
 Patch suggested to upstream but rejected for being "hackish". Though
 upstream RPM packages include packages that are only somewhat cleaner.
+---
+ Makefile.moddir_rules |    2 +-
+ apps/Makefile         |   21 +++++++++++++++++++++
+ 2 files changed, 22 insertions(+), 1 deletion(-)
 
+diff --git a/Makefile.moddir_rules b/Makefile.moddir_rules
+index e96342e..1505964 100644
+--- a/Makefile.moddir_rules
++++ b/Makefile.moddir_rules
+@@ -37,7 +37,7 @@ include $(ASTTOPDIR)/Makefile.rules
+ # Use MODULE_EXCLUDE to specify additional modules to exclude.
+ 
+ ifneq ($(MODULE_PREFIX),)
+-    ALL_C_MODS:=
++    ALL_C_MODS:=$(MODS_C_ADDITIONAL)
+     ALL_CC_MODS:=
+     ALL_C_MODS+=$(foreach p,$(MODULE_PREFIX),$(patsubst %.c,%,$(wildcard $(p)_*.c)))
+     ALL_CC_MODS+=$(foreach p,$(MODULE_PREFIX),$(patsubst %.cc,%,$(wildcard $(p)_*.cc)))
+diff --git a/apps/Makefile b/apps/Makefile
+index 4343f3c..d396f92 100644
 --- a/apps/Makefile
 +++ b/apps/Makefile
 @@ -15,6 +15,8 @@ MODULE_PREFIX=app
@@ -27,10 +49,10 @@ upstream RPM packages include packages that are only somewhat cleaner.
  MENUSELECT_OPTS_app_directory:=$(MENUSELECT_OPTS_app_voicemail)
  ifneq ($(findstring ODBC_STORAGE,$(MENUSELECT_OPTS_app_voicemail)),)
    MENUSELECT_DEPENDS_app_voicemail+=$(MENUSELECT_DEPENDS_ODBC_STORAGE)
-@@ -25,6 +27,25 @@ endif
+@@ -24,6 +26,25 @@ ifneq ($(findstring IMAP_STORAGE,$(MENUSELECT_OPTS_app_voicemail)),)
+ endif
  
  all: _all
- 
 +add_depends_cmd = sed -i -e '/^\/\*\*\* MODULEINFO/a\\t<depend>$(1)<\/depend>'
 +app_voicemail_imapstorage.c: app_voicemail.c
 +	cp $< $@
@@ -50,17 +72,6 @@ upstream RPM packages include packages that are only somewhat cleaner.
 +app_voicemail_imapstorage.o: _ASTCFLAGS+=-DIMAP_STORAGE
 +app_voicemail_odbcstorage.o: _ASTCFLAGS+=-DODBC_STORAGE
 +
+ 
  include $(ASTTOPDIR)/Makefile.moddir_rules
  
- ifneq ($(findstring $(OSARCH), mingw32 cygwin ),)
---- a/Makefile.moddir_rules
-+++ b/Makefile.moddir_rules
-@@ -37,7 +37,7 @@ include $(ASTTOPDIR)/Makefile.rules
- # Use MODULE_EXCLUDE to specify additional modules to exclude.
- 
- ifneq ($(MODULE_PREFIX),)
--    ALL_C_MODS:=
-+    ALL_C_MODS:=$(MODS_C_ADDITIONAL)
-     ALL_CC_MODS:=
-     ALL_C_MODS+=$(foreach p,$(MODULE_PREFIX),$(patsubst %.c,%,$(wildcard $(p)_*.c)))
-     ALL_CC_MODS+=$(foreach p,$(MODULE_PREFIX),$(patsubst %.cc,%,$(wildcard $(p)_*.cc)))

@@ -1,0 +1,3 @@
+usr/lib/asterisk/modules/chan_gtalk.so
+usr/lib/asterisk/modules/chan_jingle.so
+usr/lib/asterisk/modules/res_jabber.so

@@ -1,0 +1,5 @@
+usr/lib/asterisk/modules/res_calendar_caldav.so
+usr/lib/asterisk/modules/res_calendar_ews.so
+usr/lib/asterisk/modules/res_calendar_exchange.so
+usr/lib/asterisk/modules/res_calendar_icalendar.so
+usr/lib/asterisk/modules/res_calendar.so
