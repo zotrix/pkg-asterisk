@@ -1,3 +1,9 @@
+asterisk (1:11.5.0~dfsg-1) UNRELEASED; urgency=low
+
+  * update to upstream 11.5.0
+
+ -- Max N. Boyarov <max.n.boyarov@gmail.com>  Thu, 22 Aug 2013 09:25:25 +0300
+
 asterisk (1:11.4.0~dfsg-1) UNRELEASED; urgency=low
 
   * New upstrean release.
